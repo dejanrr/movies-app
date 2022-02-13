@@ -1,19 +1,11 @@
 import { useState, useEffect, createContext } from "react";
+import Api from "../services/movieService.js";
+import { Link, useNavigate } from "react-router-dom";
 
 export const MovieContext = createContext();
 
-//APIs
-
-const API_KEY = "22255a1d03be2922b50e977230a4adaa";
-
-const TOP_RATED =
-  "https://api.themoviedb.org/3/movie/top_rated?api_key=22255a1d03be2922b50e977230a4adaa&page=1";
-
-const POPULAR =
-  "https://api.themoviedb.org/3/discover/movie?api_key=22255a1d03be2922b50e977230a4adaa&sort_by=popularity.desc&page=233";
-
 export const MovieState = ({ children }) => {
-  const [movies, setMovies] = useState('');
+  const [movies, setMovies] = useState("");
   const [popularMovies, setPopularMovies] = useState();
   const [topRatedMovies, setTopRatedMovies] = useState();
   const [selectedMovie, onMovieSelect] = useState();
@@ -21,45 +13,40 @@ export const MovieState = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchVisible, setSearchVisible] = useState(true);
 
-  //movie section API
+  let navigate = useNavigate();
 
-  const MOVIE_INFO = `https://api.themoviedb.org/3/movie/${selectedMovie}?api_key=22255a1d03be2922b50e977230a4adaa`;
+  //search query
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (searchQuery) {
+      Api.getSearchData(searchQuery).then((data) => {
+        setMovies(data.results);
+      });
+      setSearchQuery("");
+    }
+
+    const navigateToSearch = () => navigate("/find");
+    navigateToSearch();
+  };
 
   //popular movies page
 
-  const getPopular = async () => {
-    const response = await fetch(POPULAR);
-    const data = await response.json();
-    setPopularMovies(data.results);
-  };
-
   useEffect(() => {
-    getPopular();
+    Api.getPopularMovies().then((data) => {
+      setPopularMovies(data.results);
+    });
   }, []);
 
   //top rated movies page
 
-  const getTopRatedMovies = async () => {
-    const topRatedMoviesResponse = await fetch(TOP_RATED);
-    const topRatedMoviesData = await topRatedMoviesResponse.json();
-    setTopRatedMovies(topRatedMoviesData.results);
-  };
-
   useEffect(() => {
-    getTopRatedMovies();
+    Api.getTopRatedMovies().then((data) => {
+      setTopRatedMovies(data.results);
+      console.log(data);
+    });
   }, []);
-
-  //movie info section
-
-  const getInfo = async () => {
-    const infoResponse = await fetch(MOVIE_INFO);
-    const infoData = await infoResponse.json();
-    setMovieInfo(infoData);
-  };
-
-  useEffect(() => {
-    getInfo();
-  }, [selectedMovie]);
 
   return (
     <MovieContext.Provider
@@ -68,6 +55,7 @@ export const MovieState = ({ children }) => {
         topRatedMovies,
         selectedMovie,
         onMovieSelect,
+        setMovieInfo,
         movieInfo,
         movies,
         setMovies,
@@ -75,6 +63,7 @@ export const MovieState = ({ children }) => {
         setSearchQuery,
         searchVisible,
         setSearchVisible,
+        handleSubmit,
       }}
     >
       {children}

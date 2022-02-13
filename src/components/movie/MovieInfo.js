@@ -1,11 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { MovieContext } from "../../Context/MovieContext";
 import "./movieinfo.css";
+
+//movie poster API
 
 const IMG_API = "https://image.tmdb.org/t/p/w1280";
 
 const MovieInfo = () => {
-  const { onMovieSelect, movieInfo } = useContext(MovieContext);
+  const { onMovieSelect, movieInfo, selectedMovie, setMovieInfo } = useContext(MovieContext);
+
+  // movie info API
+  
+  const MOVIE_INFO = `https://api.themoviedb.org/3/movie/${selectedMovie}?api_key=${process.env.REACT_APP_API_KEY}`;
+
+  //get movie info
+
+  const getInfo = async () => {
+    const infoResponse = await fetch(MOVIE_INFO);
+    const infoData = await infoResponse.json();
+    setMovieInfo(infoData);
+  };
+
+  useEffect(() => {
+    getInfo();
+  }, [selectedMovie]);
+
+  //handling movie info section closing button
 
   const closeSection = () => {
     onMovieSelect("");

@@ -1,13 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Popular from "./components/pages/Popular";
-import TopRated from "./components/pages/TopRated";
-import Search from "./components/pages/Search";
-import HomePage from "./components/homePage/HomePage";
+import Popular from "./pages/Popular";
+import TopRated from "./pages/TopRated";
+import Search from "./pages/Search";
+import HomePage from "./pages/homePage/HomePage";
 import { MovieState } from "./Context/MovieContext";
 
-function App() {
+const App = () => {
   return (
     <MovieState>
       <div className="app">

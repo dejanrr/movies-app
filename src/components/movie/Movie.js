@@ -24,7 +24,7 @@ const Movie = ({
     <div onClick={handleClick} className="movie">
       <img src={IMG_API + poster_path} alt={title} />
       <div className="movie-card">
-        <span classNmae="movie-card-title">{title}</span>
+        <span className="movie-card-title">{title}</span>
         <span className="movie-rating">{vote_average}</span>
       </div>
     </div>

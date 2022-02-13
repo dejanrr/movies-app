@@ -1,0 +1,162 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.homepage {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../../assets/bgimg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.hero-right {
+  display: flex;
+  width: 50%;
+}
+
+/* left-box */
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 80px;
+
+  font-size: 60px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.titles {
+  margin: 20% 0 0 80px;
+}
+
+.hero-title {
+  font-size: 40px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.hero-movie {
+  color: #45b6fe;
+}
+
+.subheading {
+  font-family: 'Montserrat', sans-serif;
+  text-align: justify;
+  font-weight: 400;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  margin: 0 0 0 80px;
+}
+
+/* button */
+
+.start-button {
+  background-color: transparent;
+  border: 2px solid white;
+  height: 50px;
+  width: 150px;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 20px 0 0 80px;
+  transition: all 0.35s ease-in-out;
+}
+
+.start-button:hover {
+  background-color: #45b6fe;
+  color: #fff;
+  font-weight: 600;
+  transform: scale(1.2);
+  transition: all 0.5s ease-in;
+}
+
+/* social-media-section */
+
+.social-media {
+  position: absolute;
+  top: 50%;
+  right: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translateY(-50%);
+}
+
+.social-media-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.social-media li {
+  list-style: none;
+  padding: 30%;
+  cursor: pointer;
+  transition: all 0.35s ease-in-out;
+}
+
+.social-media li a {
+  color: #fff;
+}
+
+.social-media li:hover {
+  transform: scale(1.5);
+  transition: all 0.4s ease-in-out;
+}
+
+@media only screen and (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+  }
+  
+  .hero-left {
+    width: 100%;
+  }
+  
+  .header {
+    margin: auto;
+    padding: 10%;
+    text-align: center;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .titles {
+    margin: auto;
+    padding: 10%;
+    text-align: center;
+  }
+
+  .subheading {
+    margin: auto;
+    text-align: center;
+  }
+
+  .start-button {
+    text-align: center;
+    margin: 5% auto;
+  }
+}
